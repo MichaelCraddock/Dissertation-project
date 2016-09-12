@@ -8,6 +8,7 @@ public class NPC_DialogueThief : MonoBehaviour {
     bool Activequestion = false;
     bool secondresponse = false;
     public static bool Lockpick = false;
+    public static bool thieftrue = false;
     public GUISkin skin = null;
 
     // Use this for initialization
@@ -26,7 +27,7 @@ public class NPC_DialogueThief : MonoBehaviour {
     {
         GUILayout.BeginArea(new Rect(150, 225, 200, 200));
         GUI.skin = skin;
-        if (DisplayDialogue && !Activequestion && !secondresponse)
+        if (DisplayDialogue && !Activequestion && !secondresponse && !NPC_Dialogue.guardtrue)
         {
 
             
@@ -41,6 +42,7 @@ public class NPC_DialogueThief : MonoBehaviour {
                 {
                     Class_Stats.Rogue += 1;
                     Lockpick = true;
+                    thieftrue = true;
                     Activequestion = true;
                 }
                 if (GUILayout.Button(answerbuttons[1]))
@@ -58,6 +60,10 @@ public class NPC_DialogueThief : MonoBehaviour {
         {
             GUILayout.Label(questions[2]);
 
+        }
+        if (DisplayDialogue && NPC_Dialogue.guardtrue)
+        {
+            GUILayout.Label(questions[4]);
         }
         GUILayout.EndArea();
     }

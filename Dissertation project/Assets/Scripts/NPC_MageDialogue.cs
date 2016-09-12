@@ -7,6 +7,7 @@ public class NPC_MageDialogue : MonoBehaviour {
     bool DisplayDialogue = false;
     bool Activequestion = false;
     bool secondresponse = false;
+    public static bool magetrue = false;
     public GUISkin skin = null;
 
 
@@ -27,7 +28,7 @@ public class NPC_MageDialogue : MonoBehaviour {
     {
         GUILayout.BeginArea(new Rect(150, 225, 200, 220));
         GUI.skin = skin;
-        if (DisplayDialogue && !Activequestion && !secondresponse)
+        if (DisplayDialogue && !Activequestion && !secondresponse && !NPC_DialogueThief.thieftrue)
         {
 
 
@@ -42,6 +43,7 @@ public class NPC_MageDialogue : MonoBehaviour {
                 {
                     Class_Stats.Mage += 1;
                     Activequestion = true;
+                    magetrue = true;
                 }
                 if (GUILayout.Button(answerbuttons[1]))
                 {
@@ -58,6 +60,11 @@ public class NPC_MageDialogue : MonoBehaviour {
         {
             GUILayout.Label(questions[2]);
 
+        }
+        
+        if (DisplayDialogue && NPC_DialogueThief.thieftrue)
+        {
+            GUILayout.Label(questions[4]);
         }
         GUILayout.EndArea();
     }

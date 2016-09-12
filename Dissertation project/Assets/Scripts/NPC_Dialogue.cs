@@ -7,6 +7,7 @@ public class NPC_Dialogue : MonoBehaviour {
     bool DisplayDialogue = false;
     bool Activequestion = false;
     bool notinterested = false;
+    public static bool guardtrue = false;
     public GUISkin skin = null;
 
     // Use this for initialization
@@ -22,13 +23,14 @@ public class NPC_Dialogue : MonoBehaviour {
     void OnGUI(){
         GUILayout.BeginArea(new Rect(150, 225, 200, 200));
         GUI.skin = skin;
-        if (DisplayDialogue && !Activequestion && !notinterested)
+        if (DisplayDialogue && !Activequestion && !notinterested && !NPC_MageDialogue.magetrue)
         {
             GUILayout.Label(questions[0]);
             if (GUILayout.Button(answerbuttons[0]))
             {
                 Class_Stats.Warrior += 1;
                 Activequestion = true;
+                guardtrue = true;
                 
             }
             if (GUILayout.Button(answerbuttons[1]))
@@ -56,6 +58,10 @@ public class NPC_Dialogue : MonoBehaviour {
         if (DisplayDialogue && notinterested)
         {
             GUILayout.Label(questions[2]);
+        }
+        if (DisplayDialogue && NPC_MageDialogue.magetrue)
+        {
+            GUILayout.Label(questions[3]);
         }
         GUILayout.EndArea();
     }
